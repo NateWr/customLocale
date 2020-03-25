@@ -13,6 +13,7 @@ $(function() {
 		methods: {
 			search: function() {
 				if (!this.searchPhrase) {
+					this.initializeView();
 					return;
 				}
 				this.currentPage = 1;
@@ -27,6 +28,13 @@ $(function() {
 					}
 				}
 				this.currentLocaleKeys = currentLocaleKeys;
+			},
+			initializeView: function() {
+				this.searchPhrase = "";
+				this.currentPage = 1;
+				var end = this.currentPage * this.itemsPerPage;
+				var start = end - this.itemsPerPage;
+				this.currentLocaleKeys = this.localeKeys.slice(start,end);
 			}
 		},
 		computed: {
@@ -48,7 +56,11 @@ $(function() {
 			}
 		},
 		mounted: function() {
-			this.currentPage = 1;
+			this.initializeView();
+		},
+		beforeDestroy: function() {
+			this.currentPage = 0;
+			console.log("Before destroy");
 		},
 	};
 });
