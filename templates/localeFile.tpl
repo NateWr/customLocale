@@ -75,3 +75,6 @@
 	customLocalesApp.data.localeKeys = {$referenceLocaleContentsArray|json_encode};
 	new pkp.Vue(customLocalesApp);
 </script>
+<script type="text/javascript">
+	console.log("This has been duplicated.");
+</script>

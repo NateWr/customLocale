@@ -60,7 +60,7 @@ class LocaleFileForm extends Form {
 			];
 		}
 
-
+		// TODO: Old pagination related
 		$dropdownEntries = array();
 		for ($i=1; $i<=$numberOfPages; $i++) {
 			if ($i==$currentPage) {

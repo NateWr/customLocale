@@ -58,9 +58,5 @@ $(function() {
 		mounted: function() {
 			this.initializeView();
 		},
-		beforeDestroy: function() {
-			this.currentPage = 0;
-			console.log("Before destroy");
-		},
 	};
 });
