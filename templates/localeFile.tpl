@@ -6,29 +6,8 @@
  *
  *}
 
-<script type="text/javascript">
-	$(function() {ldelim}
-		// Attach the form handler.
-		$('#localeFilesForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
-	{rdelim});
-</script>
-
-<script type="text/javascript">
-	var searchString = {$searchString|json_encode};
-	{literal}
-		function checkKey() {
-			document.getElementById("searchKey").checked = true;
-		}
-		if (document.getElementById(searchString)) {
-			document.getElementById(searchString).scrollIntoView(false);
-		}
-	{/literal}
-</script>
-
-
-<link rel="stylesheet" href="{$baseUrl}/plugins/generic/customLocale/css/customLocale.css" type="text/css" />
-
 <form class="pkp_form" id="localeFilesForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler" op="updateLocale" currentPage=$currentPage locale=$locale key=$filePath anchor="localeContents"}">
+	<link rel="stylesheet" href="{$baseUrl}/plugins/generic/customLocale/css/customLocale.css" type="text/css" />
 	<div id="customLocales">
 		<div class="customLocales__search">
 			<label for="customLocalesSearch">
@@ -67,14 +46,16 @@
 		</table>
 		{fbvFormButtons id="submitCustomLocaleFileTemplate" submitText="plugins.generic.customLocale.saveAndContinue"}
 	</div>
+	<script type="text/javascript">
+		$(function() {ldelim}
+			// Attach the form handler.
+			$('#localeFilesForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
+		{rdelim});
+
+		{if $localeContents}
+			customLocalesApp.data.edited = {$localeContents|json_encode};
+		{/if}
+		customLocalesApp.data.localeKeys = {$referenceLocaleContentsArray|json_encode};
+		new pkp.Vue(customLocalesApp);
+	</script>
 </form>
-<script type="text/javascript">
-	{if $localeContents}
-		customLocalesApp.data.edited = {$localeContents|json_encode};
-	{/if}
-	customLocalesApp.data.localeKeys = {$referenceLocaleContentsArray|json_encode};
-	new pkp.Vue(customLocalesApp);
-</script>
-<script type="text/javascript">
-	console.log("This has been duplicated.");
-</script>
